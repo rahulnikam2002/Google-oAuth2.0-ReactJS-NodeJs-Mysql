@@ -4,6 +4,7 @@ const cors = require("cors")
 const db = require("./db/db.js")
 const cookieSession = require("cookie-session")
 const passport = require("passport")
+require("dotenv").config()
 
 
 // creating our app using express
@@ -19,13 +20,18 @@ app.use(cookieSession({
     keys: ["askduhakdnkbiygvhbad7a6s*&^*S^D8asdbk"],
     maxAge: 24*60*60*100
 }))
-
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}))
 app.use(passport.initialize())
 app.use(passport.session());
 
 db.getConnection((err,connection) => {
     console.log("Connection to database is successful")
 })
+
+app.use('/auth', require('./Routers/auth/passport'));
 
 
 app.listen(PORT, () =>{

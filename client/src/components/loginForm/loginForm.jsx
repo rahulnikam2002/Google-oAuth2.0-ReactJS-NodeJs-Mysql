@@ -6,6 +6,8 @@ import { ButtonBase } from "@mui/material";
 import "./loginForm.css";
 import { styled } from "@mui/material/styles";
 import googleIcon from "../../Images/GoogleIcon.svg";
+import Axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 const CustomButton = styled(Button)({
   boxShadow: "none",
@@ -46,6 +48,27 @@ const CustomButton = styled(Button)({
 });
 
 export const LoginForm = () => {
+
+  const navigate = useNavigate()
+
+  const signInWithGoogle = () => {
+    window.open("http://localhost:5000/auth/google", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
+  }
+
+  React.useEffect(() => {
+    Axios.get("http://localhost:5000/auth/login/success", {
+      withCredentials: true,
+    })
+      .then((res) => {
+        if (res.status == 200) {
+          navigate('/')
+        } else {
+          console.log("No status");
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div
       style={{
@@ -104,6 +127,7 @@ export const LoginForm = () => {
           border: "none",
           borderRadius: "10px"
         }}
+        onClick={signInWithGoogle}
         variant="outlined"
       >
         <img
