@@ -50,7 +50,7 @@ const CustomButton = styled(Button)({
 export const LoginForm = () => {
 
   const navigate = useNavigate()
-
+  //Requesting on http://localhost:5000/auth/google once user click on sign in with google
   const signInWithGoogle = () => {
     window.open("http://localhost:5000/auth/google", "_self", 'toolbar=no, scrollbars=yes, resizable=no, width=1000, height=auto')
   }
