@@ -11,6 +11,8 @@ function App() {
   let [userEmail, setUserEmail] = useState("");
   let [userImg, setUserImg] = useState("");
 
+  
+  //Requesting on http://localhost:5000/auth/login/success and getting users data.
   useEffect(() => {
     Axios.get("http://localhost:5000/auth/login/success", {
       withCredentials: true,
